@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Details - Farmate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Vehicle Details</h1>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Vehicle Image -->
+        <section class="vehicle-image-section">
+            <div class="vehicle-image-large">
+                <i class="fas fa-tractor" style="font-size: 8rem; color: #2e7d32;"></i>
+            </div>
+        </section>
+
+        <!-- Vehicle Info -->
+        <section class="vehicle-info-section">
+            <div class="vehicle-basic-info">
+                <h2 id="vehicleType">Tractor - Mahindra</h2>
+                <p id="vehicleModel">Model: 475 DI</p>
+                <div class="vehicle-rating">
+                    <i class="fas fa-star"></i>
+                    <span id="vehicleRating">4.8 (120 reviews)</span>
+                </div>
+            </div>
+
+            <div class="vehicle-specs">
+                <div class="spec-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Year: <span id="vehicleYear">2022</span></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-id-card"></i>
+                    <span>Reg No: <span id="regNumber">GJ05 AB 1234</span></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Fuel: <span id="fuelType">Diesel</span></span>
+                </div>
+            </div>
+
+            <div class="vehicle-features">
+                <h3>Features</h3>
+                <ul id="featuresList">
+                    <li>Power Steering</li>
+                    <li>AC Cabin</li>
+                    <li>GPS Tracking</li>
+                    <li>Emergency Kit</li>
+                </ul>
+            </div>
+
+            <div class="vehicle-description">
+                <h3>Description</h3>
+                <p id="vehicleDescription">Well-maintained tractor suitable for all types of farming work. Professional driver with 5+ years of experience.</p>
+            </div>
+        </section>
+
+        <!-- Driver Info -->
+        <section class="driver-info-section">
+            <h3>Driver Information</h3>
+            <div class="driver-card">
+                <div class="driver-avatar">
+                    <i class="fas fa-user-circle" style="font-size: 3rem;"></i>
+                </div>
+                <div class="driver-details">
+                    <h4 id="driverName">Rajesh Patel</h4>
+                    <div class="driver-rating">
+                        <i class="fas fa-star"></i>
+                        <span id="driverRating">4.7</span>
+                    </div>
+                    <p id="driverExperience">5+ years experience</p>
+                </div>
+                <div class="driver-actions">
+                    <button class="btn-secondary"><i class="fas fa-phone"></i></button>
+                    <button class="btn-secondary"><i class="fas fa-comment"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="pricing-section">
+            <h3>Pricing</h3>
+            <div class="pricing-options">
+                <div class="pricing-item">
+                    <h4>Per Hour</h4>
+                    <p class="price" id="hourlyRate">₹500/hr</p>
+                </div>
+                <div class="pricing-item">
+                    <h4>Per Day</h4>
+                    <p class="price" id="dailyRate">₹3000/day</p>
+                </div>
+                <div class="pricing-item">
+                    <h4>Per Acre</h4>
+                    <p class="price" id="acreRate">₹800/acre</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Options -->
+        <section class="booking-section">
+            <h3>Book Now</h3>
+            <div class="booking-options">
+                <div class="booking-option">
+                    <label>
+                        <input type="radio" name="bookingType" value="instant" checked>
+                        <span>Instant Booking</span>
+                    </label>
+                </div>
+                <div class="booking-option">
+                    <label>
+                        <input type="radio" name="bookingType" value="scheduled">
+                        <span>Scheduled Booking</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="booking-form">
+                <div class="form-group">
+                    <label for="bookingDate">Date</label>
+                    <input type="date" id="bookingDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="bookingTime">Time</label>
+                    <input type="time" id="bookingTime" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="durationType">Duration Type</label>
+                    <select id="durationType" required>
+                        <option value="hourly">Per Hour</option>
+                        <option value="daily">Per Day</option>
+                        <option value="acre">Per Acre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity/Duration</label>
+                    <input type="number" id="quantity" min="1" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Pickup Location</label>
+                    <input type="text" id="location" placeholder="Enter your location" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="workType">Type of Work</label>
+                    <select id="workType" required>
+                        <option value="ploughing">Ploughing</option>
+                        <option value="harvesting">Harvesting</option>
+                        <option value="spraying">Spraying</option>
+                        <option value="transport">Transport</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" placeholder="Any special requirements..."></textarea>
+                </div>
+            </div>
+
+            <div class="total-section">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-amount" id="totalAmount">₹0</span>
+                </div>
+            </div>
+
+            <button class="btn-primary book-now-btn" id="bookNowBtn">Book Now</button>
+        </section>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Get vehicle ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const vehicleId = urlParams.get('id');
+
+        // Load vehicle details
+        async function loadVehicleDetails() {
+            if (!vehicleId) return;
+
+            try {
+                const response = await fetch(`/api/vehicles/${vehicleId}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const vehicle = data.vehicle;
+                    
+                    document.getElementById('vehicleType').textContent = `${vehicle.type} - ${vehicle.brand}`;
+                    document.getElementById('vehicleModel').textContent = `Model: ${vehicle.model}`;
+                    document.getElementById('vehicleYear').textContent = vehicle.year;
+                    document.getElementById('regNumber').textContent = vehicle.registrationNumber;
+                    document.getElementById('hourlyRate').textContent = `₹${vehicle.hourlyRate}/hr`;
+                    document.getElementById('dailyRate').textContent = `₹${vehicle.dailyRate}/day`;
+                    
+                    // Set default values for other fields
+                    document.getElementById('vehicleRating').textContent = '4.8 (120 reviews)';
+                    document.getElementById('fuelType').textContent = 'Diesel';
+                    document.getElementById('driverName').textContent = vehicle.driverId?.name || 'Rajesh Patel';
+                    document.getElementById('driverRating').textContent = vehicle.driverId?.rating?.average || '4.7';
+                    document.getElementById('vehicleDescription').textContent = vehicle.description || 'Well-maintained vehicle suitable for all types of farming work.';
+                    
+                    // Update features list
+                    const featuresList = document.getElementById('featuresList');
+                    featuresList.innerHTML = '';
+                    vehicle.features?.forEach(feature => {
+                        const li = document.createElement('li');
+                        li.textContent = feature;
+                        featuresList.appendChild(li);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading vehicle details:', error);
+            }
+        }
+
+        // Calculate total amount
+        function calculateTotal() {
+            const hourlyRate = 500; // This would come from the vehicle data
+            const dailyRate = 3000;
+            const acreRate = 800;
+            
+            const durationType = document.getElementById('durationType').value;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+            
+            let total = 0;
+            switch(durationType) {
+                case 'hourly':
+                    total = hourlyRate * quantity;
+                    break;
+                case 'daily':
+                    total = dailyRate * quantity;
+                    break;
+                case 'acre':
+                    total = acreRate * quantity;
+                    break;
+            }
+            
+            document.getElementById('totalAmount').textContent = `₹${total}`;
+        }
+
+        // Book now button
+        document.getElementById('bookNowBtn').addEventListener('click', async function() {
+            const bookingDate = document.getElementById('bookingDate').value;
+            const bookingTime = document.getElementById('bookingTime').value;
+            const durationType = document.getElementById('durationType').value;
+            const quantity = document.getElementById('quantity').value;
+            const location = document.getElementById('location').value;
+            const workType = document.getElementById('workType').value;
+            const notes = document.getElementById('notes').value;
+
+            if (!bookingDate || !bookingTime || !location) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // In a real app, this would send the booking to the backend
+            try {
+                const response = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-auth-token': localStorage.getItem('token')
+                    },
+                    body: JSON.stringify({
+                        farmerId: 'current_farmer_id', // This would come from the logged-in user
+                        driverId: 'driver_id_from_vehicle', // This would come from the vehicle data
+                        vehicleId: vehicleId,
+                        bookingType: 'instant', // or 'scheduled'
+                        startDate: new Date(`${bookingDate}T${bookingTime}`),
+                        endDate: new Date(new Date(`${bookingDate}T${bookingTime}`).getTime() + (durationType === 'hourly' ? quantity * 60 * 60 * 1000 : durationType === 'daily' ? quantity * 24 * 60 * 60 * 1000 : quantity * 24 * 60 * 60 * 1000)), // Simplified
+                        durationType: durationType,
+                        quantity: parseInt(quantity),
+                        totalPrice: parseInt(document.getElementById('totalAmount').textContent.replace('₹', '')),
+                        paymentMethod: 'upi', // Default payment method
+                        pickupLocation: { address: location },
+                        notes: notes,
+                        workType: workType
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Booking confirmed successfully!');
+                    window.location.href = 'BookingsScreen.html';
+                } else {
+                    alert(data.message || 'Booking failed');
+                }
+            } catch (error) {
+                console.error('Error creating booking:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+
+        // Add event listeners for calculation
+        document.getElementById('durationType').addEventListener('change', calculateTotal);
+        document.getElementById('quantity').addEventListener('input', calculateTotal);
+
+        // Set min date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('bookingDate').min = today;
+
+        // Load vehicle details when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVehicleDetails();
+            calculateTotal(); // Initial calculation
+        });
+    </script>
+</body>
+</html>

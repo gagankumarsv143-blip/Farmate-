@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Farmate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="location-selector">
+                <i class="fas fa-map-marker-alt"></i>
+                <select id="locationSelect">
+                    <option value="">Select Location</option>
+                    <option value="ahmedabad">Ahmedabad</option>
+                    <option value="surat">Surat</option>
+                    <option value="vadodara">Vadodara</option>
+                    <option value="rajkot">Rajkot</option>
+                    <option value="bhavnagar">Bhavnagar</option>
+                </select>
+            </div>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>Find Farm Vehicles Near You</h1>
+            <p>Tractors, Harvesters, Water Tankers & More</p>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search vehicles...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </section>
+
+        <!-- Vehicle Categories -->
+        <section class="vehicle-categories">
+            <h2>Vehicle Types</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-type="tractor">
+                    <i class="fas fa-tractor"></i>
+                    <h3>Tractor</h3>
+                </div>
+                <div class="category-card" data-type="harvester">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Harvester</h3>
+                </div>
+                <div class="category-card" data-type="tiller">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Power Tiller</h3>
+                </div>
+                <div class="category-card" data-type="sprayer">
+                    <i class="fas fa-spray-can"></i>
+                    <h3>Sprayer</h3>
+                </div>
+                <div class="category-card" data-type="seed-drill">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Seed Drill</h3>
+                </div>
+                <div class="category-card" data-type="water-tanker">
+                    <i class="fas fa-water"></i>
+                    <h3>Water Tanker</h3>
+                </div>
+                <div class="category-card" data-type="mini-truck">
+                    <i class="fas fa-truck"></i>
+                    <h3>Mini Truck</h3>
+                </div>
+                <div class="category-card" data-type="rotavator">
+                    <i class="fas fa-wrench"></i>
+                    <h3>Rotavator</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nearby Vehicles -->
+        <section class="nearby-vehicles">
+            <div class="section-header">
+                <h2>Nearby Vehicles</h2>
+                <button class="btn-secondary" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            <div class="vehicles-list" id="vehiclesList">
+                <!-- Vehicles will be loaded here dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="HomeScreen.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="BookingsScreen.html" class="nav-item">
+            <i class="fas fa-book"></i>
+            <span>Bookings</span>
+        </a>
+        <a href="ProfileScreen.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Load nearby vehicles
+        async function loadNearbyVehicles() {
+            try {
+                const response = await fetch('/api/vehicles?limit=10');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const vehiclesList = document.getElementById('vehiclesList');
+                    vehiclesList.innerHTML = '';
+                    
+                    data.vehicles.forEach(vehicle => {
+                        const vehicleCard = document.createElement('div');
+                        vehicleCard.className = 'vehicle-card';
+                        vehicleCard.innerHTML = `
+                            <div class="vehicle-image">
+                                <i class="fas fa-tractor" style="font-size: 3rem; color: #2e7d32;"></i>
+                            </div>
+                            <div class="vehicle-info">
+                                <h3>${vehicle.type} - ${vehicle.brand}</h3>
+                                <p>${vehicle.model} (${vehicle.year})</p>
+                                <div class="vehicle-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>${vehicle.driverId.rating?.average || '4.5'}</span>
+                                </div>
+                                <div class="vehicle-price">
+                                    <span>₹${vehicle.hourlyRate}/hr</span>
+                                    <span>₹${vehicle.dailyRate}/day</span>
+                                </div>
+                            </div>
+                            <button class="btn-primary book-btn" data-vehicle-id="${vehicle._id}">
+                                Book Now
+                            </button>
+                        `;
+                        vehiclesList.appendChild(vehicleCard);
+                        
+                        // Add event listener to book button
+                        vehicleCard.querySelector('.book-btn').addEventListener('click', function() {
+                            const vehicleId = this.getAttribute('data-vehicle-id');
+                            window.location.href = `VehicleDetailScreen.html?id=${vehicleId}`;
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading vehicles:', error);
+            }
+        }
+
+        // Search vehicles
+        document.getElementById('searchBtn').addEventListener('click', async function() {
+            const searchTerm = document.getElementById('searchInput').value;
+            const location = document.getElementById('locationSelect').value;
+            
+            try {
+                let url = '/api/vehicles?limit=20';
+                if (searchTerm) {
+                    url += `&type=${searchTerm}`;
+                }
+                if (location) {
+                    // In a real app, this would use geolocation
+                    url += `&location=${location}`;
+                }
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.success) {
+                    const vehiclesList = document.getElementById('vehiclesList');
+                    vehiclesList.innerHTML = '';
+                    
+                    data.vehicles.forEach(vehicle => {
+                        const vehicleCard = document.createElement('div');
+                        vehicleCard.className = 'vehicle-card';
+                        vehicleCard.innerHTML = `
+                            <div class="vehicle-image">
+                                <i class="fas fa-tractor" style="font-size: 3rem; color: #2e7d32;"></i>
+                            </div>
+                            <div class="vehicle-info">
+                                <h3>${vehicle.type} - ${vehicle.brand}</h3>
+                                <p>${vehicle.model} (${vehicle.year})</p>
+                                <div class="vehicle-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>${vehicle.driverId.rating?.average || '4.5'}</span>
+                                </div>
+                                <div class="vehicle-price">
+                                    <span>₹${vehicle.hourlyRate}/hr</span>
+                                    <span>₹${vehicle.dailyRate}/day</span>
+                                </div>
+                            </div>
+                            <button class="btn-primary book-btn" data-vehicle-id="${vehicle._id}">
+                                Book Now
+                            </button>
+                        `;
+                        vehiclesList.appendChild(vehicleCard);
+                        
+                        // Add event listener to book button
+                        vehicleCard.querySelector('.book-btn').addEventListener('click', function() {
+                            const vehicleId = this.getAttribute('data-vehicle-id');
+                            window.location.href = `VehicleDetailScreen.html?id=${vehicleId}`;
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error('Error searching vehicles:', error);
+            }
+        });
+
+        // Category selection
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const vehicleType = this.getAttribute('data-type');
+                document.getElementById('searchInput').value = vehicleType;
+                document.getElementById('searchBtn').click();
+            });
+        });
+
+        // Refresh button
+        document.getElementById('refreshBtn').addEventListener('click', loadNearbyVehicles);
+
+        // Load vehicles when page loads
+        document.addEventListener('DOMContentLoaded', loadNearbyVehicles);
+    </script>
+</body>
+</html>

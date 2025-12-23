@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmate - Uber for Farm Vehicles</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>Farmate</h2>
+                    <span>Uber for Farm Vehicles</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="screens/HomeScreen.html">Home</a></li>
+                    <li><a href="screens/BookingsScreen.html">Bookings</a></li>
+                    <li><a href="screens/ProfileScreen.html">Profile</a></li>
+                    <li><a href="screens/SupportScreen.html">Support</a></li>
+                    <li><a href="screens/LoginScreen.html" class="btn-login" id="loginBtn">Login</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Get Farm Vehicles On-Demand</h1>
+                <p>Connect with nearby farm vehicles like tractors, harvesters, and more. Book instantly with transparent pricing.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" id="bookNowBtn">Book Now</button>
+                    <button class="btn-secondary" id="learnMoreBtn">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/farm-vehicle-hero.jpg" alt="Farm Vehicle">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Why Choose Farmate?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Instant Booking</h3>
+                    <p>Book vehicles instantly with just a few taps</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Nearby Availability</h3>
+                    <p>Find vehicles near your location</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-rupee-sign"></i>
+                    <h3>Transparent Pricing</h3>
+                    <p>Know the exact price before booking</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Verified Drivers</h3>
+                    <p>Professional and reliable drivers</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Live Tracking</h3>
+                    <p>Track your vehicle in real-time</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Driver Ratings</h3>
+                    <p>Choose based on driver ratings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicle Categories -->
+    <section id="vehicles" class="vehicles">
+        <div class="container">
+            <h2>Vehicle Categories</h2>
+            <div class="vehicle-categories">
+                <div class="vehicle-category">
+                    <i class="fas fa-tractor"></i>
+                    <h3>Tractor</h3>
+                    <p>Powerful tractors for all your farming needs</p>
+                </div>
+                <div class="vehicle-category">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Harvester</h3>
+                    <p>Efficient harvesting machines</p>
+                </div>
+                <div class="vehicle-category">
+                    <i class="fas fa-water"></i>
+                    <h3>Water Tanker</h3>
+                    <p>Water transport for irrigation</p>
+                </div>
+                <div class="vehicle-category">
+                    <i class="fas fa-spray-can"></i>
+                    <h3>Sprayer</h3>
+                    <p>Pesticide and fertilizer sprayers</p>
+                </div>
+                <div class="vehicle-category">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Rotavator</h3>
+                    <p>Soil preparation equipment</p>
+                </div>
+                <div class="vehicle-category">
+                    <i class="fas fa-truck"></i>
+                    <h3>Mini Trucks</h3>
+                    <p>Transport for farm produce</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How Farmate Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Register & Login</h3>
+                    <p>Create your account with phone number verification</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Select Vehicle</h3>
+                    <p>Choose from nearby available vehicles</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Book & Pay</h3>
+                    <p>Book instantly and pay securely</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Track & Use</h3>
+                    <p>Track vehicle arrival and start using</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book Your Vehicle</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="vehicleType">Vehicle Type</label>
+                    <select id="vehicleType" required>
+                        <option value="">Select Vehicle Type</option>
+                        <option value="tractor">Tractor</option>
+                        <option value="harvester">Harvester</option>
+                        <option value="water-tanker">Water Tanker</option>
+                        <option value="sprayer">Sprayer</option>
+                        <option value="rotavator">Rotavator</option>
+                        <option value="mini-truck">Mini Truck</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <select id="duration" required>
+                        <option value="">Select Duration</option>
+                        <option value="hourly">Hourly</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Enter your location" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <button type="submit" class="btn-primary">Book Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login to Farmate</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                </div>
+                <button type="submit" class="btn-primary">Send OTP</button>
+            </form>
+            <div class="otp-form" style="display:none;">
+                <div class="form-group">
+                    <label for="otp">Enter OTP</label>
+                    <input type="text" id="otp" placeholder="Enter 6-digit OTP" maxlength="6">
+                </div>
+                <button class="btn-primary" id="verifyOtp">Verify OTP</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Farmate</h3>
+                    <p>Connecting farmers with farm vehicles on-demand. Your reliable partner for agricultural equipment.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#vehicles">Vehicles</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-envelope"></i> info@farmate.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Gujarat, India</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Farmate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

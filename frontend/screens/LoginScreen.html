@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Farmate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Welcome Back</h2>
+                <p>Login to your Farmate account</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userType">User Type</label>
+                    <select id="userType" required>
+                        <option value="farmer">Farmer</option>
+                        <option value="driver">Vehicle Owner</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-primary">Send OTP</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="RegisterScreen.html">Register</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('phone').value;
+            const userType = document.getElementById('userType').value;
+            
+            // Send login data to backend
+            try {
+                const response = await fetch('/api/auth/send-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        phone: phone,
+                        userType: userType
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show OTP verification screen
+                    showOTPVerification(phone, userType);
+                } else {
+                    alert(data.message || 'Login failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+        
+        function showOTPVerification(phone, userType) {
+            document.querySelector('.auth-card').innerHTML = `
+                <div class="auth-header">
+                    <h2>Verify OTP</h2>
+                    <p>Enter the 6-digit code sent to ${phone}</p>
+                </div>
+                
+                <form id="otpLoginForm">
+                    <div class="form-group">
+                        <label for="otp">Enter OTP</label>
+                        <input type="text" id="otp" placeholder="Enter 6-digit OTP" maxlength="6" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Verify & Login</button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Didn't receive OTP? <a href="#" id="resendLoginOtp">Resend</a></p>
+                </div>
+            `;
+            
+            document.getElementById('otpLoginForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const otp = document.getElementById('otp').value;
+                
+                try {
+                    const response = await fetch('/api/auth/verify-otp', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            phone: phone,
+                            otp: otp,
+                            userType: userType
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Save token and redirect to appropriate screen
+                        localStorage.setItem('token', data.token);
+                        if (userType === 'farmer') {
+                            window.location.href = 'HomeScreen.html';
+                        } else {
+                            window.location.href = 'DriverDashboard.html';
+                        }
+                    } else {
+                        alert(data.message || 'OTP verification failed');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                }
+            });
+            
+            document.getElementById('resendLoginOtp').addEventListener('click', function(e) {
+                e.preventDefault();
+                // Resend OTP logic
+                alert('OTP resent to ' + phone);
+            });
+        }
+    </script>
+</body>
+</html>

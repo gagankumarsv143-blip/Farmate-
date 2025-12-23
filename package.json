@@ -1,0 +1,19 @@
+{
+  "name": "farmate-web-app",
+  "version": "1.0.0",
+  "description": "Farmate - Uber for Farm Vehicles Web Application",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "cd backend && node server.js",
+    "dev": "concurrently \"cd backend && nodemon server.js\" \"cd frontend && live-server\"",
+    "install-all": "npm install && cd backend && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["farmate", "farm", "vehicle", "rental", "agriculture"],
+  "author": "Farmate Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "live-server": "^1.2.2"
+  }
+}

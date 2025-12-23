@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Farmate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>My Profile</h1>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Profile Header -->
+        <section class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle" style="font-size: 5rem; color: #2e7d32;"></i>
+            </div>
+            <div class="profile-info">
+                <h2 id="userName">Rajesh Kumar</h2>
+                <p id="userPhone">+91 98765 43210</p>
+                <p id="userVillage">Village: Anand</p>
+            </div>
+        </section>
+
+        <!-- Profile Stats -->
+        <section class="profile-stats">
+            <div class="stat-card">
+                <i class="fas fa-book"></i>
+                <div class="stat-info">
+                    <h3 id="totalBookings">24</h3>
+                    <p>Total Bookings</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <div class="stat-info">
+                    <h3 id="avgRating">4.7</h3>
+                    <p>Avg Rating</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-rupee-sign"></i>
+                <div class="stat-info">
+                    <h3 id="totalSpent">₹28,500</h3>
+                    <p>Total Spent</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Details -->
+        <section class="profile-details">
+            <div class="detail-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="detail-content">
+                    <label>Village</label>
+                    <span id="villageName">Anand</span>
+                </div>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-landmark"></i>
+                <div class="detail-content">
+                    <label>Land Type</label>
+                    <span id="landType">Irrigated</span>
+                </div>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-language"></i>
+                <div class="detail-content">
+                    <label>Language</label>
+                    <span id="language">Gujarati</span>
+                </div>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="detail-content">
+                    <label>Member Since</label>
+                    <span id="memberSince">Jan 2023</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Actions -->
+        <section class="profile-actions">
+            <button class="action-btn" id="editProfileBtn">
+                <i class="fas fa-edit"></i>
+                <span>Edit Profile</span>
+            </button>
+            <button class="action-btn" id="changeLanguageBtn">
+                <i class="fas fa-language"></i>
+                <span>Change Language</span>
+            </button>
+            <button class="action-btn" id="supportBtn">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </button>
+            <button class="action-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="HomeScreen.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="BookingsScreen.html" class="nav-item">
+            <i class="fas fa-book"></i>
+            <span>Bookings</span>
+        </a>
+        <a href="ProfileScreen.html" class="nav-item active">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Load profile data
+        async function loadProfile() {
+            try {
+                // In a real app, this would fetch from the backend
+                // For now, we'll use mock data
+                const mockProfile = {
+                    name: 'Rajesh Kumar',
+                    phone: '+91 98765 43210',
+                    village: 'Anand',
+                    landType: 'Irrigated',
+                    language: 'Gujarati',
+                    memberSince: 'Jan 2023',
+                    totalBookings: 24,
+                    avgRating: 4.7,
+                    totalSpent: 28500
+                };
+
+                document.getElementById('userName').textContent = mockProfile.name;
+                document.getElementById('userPhone').textContent = mockProfile.phone;
+                document.getElementById('userVillage').textContent = `Village: ${mockProfile.village}`;
+                document.getElementById('villageName').textContent = mockProfile.village;
+                document.getElementById('landType').textContent = mockProfile.landType;
+                document.getElementById('language').textContent = mockProfile.language;
+                document.getElementById('memberSince').textContent = mockProfile.memberSince;
+                document.getElementById('totalBookings').textContent = mockProfile.totalBookings;
+                document.getElementById('avgRating').textContent = mockProfile.avgRating;
+                document.getElementById('totalSpent').textContent = `₹${mockProfile.totalSpent}`;
+            } catch (error) {
+                console.error('Error loading profile:', error);
+            }
+        }
+
+        // Edit profile
+        document.getElementById('editProfileBtn').addEventListener('click', function() {
+            alert('Edit profile functionality would go here');
+        });
+
+        // Change language
+        document.getElementById('changeLanguageBtn').addEventListener('click', function() {
+            const languages = [
+                { code: 'en', name: 'English' },
+                { code: 'hi', name: 'हिंदी' },
+                { code: 'gu', name: 'ગુજરાતી' },
+                { code: 'kn', name: 'ಕನ್ನಡ' },
+                { code: 'te', name: 'తెలుగు' },
+                { code: 'ta', name: 'தமிழ்' }
+            ];
+            
+            let languageOptions = 'Select Language:\n\n';
+            languages.forEach((lang, index) => {
+                languageOptions += `${index + 1}. ${lang.name}\n`;
+            });
+            
+            languageOptions += '\nEnter number:';
+            
+            const selection = prompt(languageOptions);
+            if (selection && !isNaN(selection) && selection >= 1 && selection <= languages.length) {
+                const selectedLang = languages[selection - 1];
+                alert(`Language changed to ${selectedLang.name}`);
+            }
+        });
+
+        // Support
+        document.getElementById('supportBtn').addEventListener('click', function() {
+            window.location.href = 'SupportScreen.html';
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('token');
+                window.location.href = 'LoginScreen.html';
+            }
+        });
+
+        // Load profile when page loads
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>

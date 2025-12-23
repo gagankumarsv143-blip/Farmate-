@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Vehicle - Farmate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Track Vehicle</h1>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Tracking Info -->
+        <section class="tracking-info">
+            <div class="booking-details">
+                <h3>Tractor - Mahindra</h3>
+                <p class="booking-date">Scheduled: Dec 25, 2023 at 08:00 AM</p>
+                <p class="booking-location">Location: Ahmedabad</p>
+            </div>
+            
+            <div class="driver-info">
+                <div class="driver-avatar">
+                    <i class="fas fa-user-circle" style="font-size: 3rem;"></i>
+                </div>
+                <div class="driver-details">
+                    <h4>Rajesh Patel</h4>
+                    <div class="driver-rating">
+                        <i class="fas fa-star"></i>
+                        <span>4.7</span>
+                    </div>
+                    <p>Driver</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Container (Simulated) -->
+        <section class="map-container">
+            <div class="map-placeholder">
+                <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: #2e7d32;"></i>
+                <p>Vehicle Location: 2.5 km away</p>
+                <p>ETA: 15 mins</p>
+            </div>
+        </section>
+
+        <!-- Vehicle Status -->
+        <section class="vehicle-status">
+            <h3>Vehicle Status</h3>
+            <div class="status-steps">
+                <div class="status-step completed">
+                    <div class="step-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4>Booking Confirmed</h4>
+                        <p>Dec 24, 2023 - 10:30 AM</p>
+                    </div>
+                </div>
+                <div class="status-step completed">
+                    <div class="step-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4>Vehicle En Route</h4>
+                        <p>Dec 24, 2023 - 11:15 AM</p>
+                    </div>
+                </div>
+                <div class="status-step active">
+                    <div class="step-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4>Arriving Soon</h4>
+                        <p>Estimated: 15 mins</p>
+                    </div>
+                </div>
+                <div class="status-step">
+                    <div class="step-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4>Work Started</h4>
+                        <p>Yet to start</p>
+                    </div>
+                </div>
+                <div class="status-step">
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="step-info">
+                        <h4>Work Completed</h4>
+                        <p>Yet to complete</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Communication -->
+        <section class="communication-section">
+            <div class="action-buttons">
+                <button class="action-btn primary" id="callDriverBtn">
+                    <i class="fas fa-phone"></i>
+                    <span>Call Driver</span>
+                </button>
+                <button class="action-btn secondary" id="messageDriverBtn">
+                    <i class="fas fa-comment"></i>
+                    <span>Message</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="HomeScreen.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="BookingsScreen.html" class="nav-item active">
+            <i class="fas fa-book"></i>
+            <span>Bookings</span>
+        </a>
+        <a href="ProfileScreen.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Simulate real-time updates
+        function updateTrackingInfo() {
+            // In a real app, this would fetch real-time location data from the backend
+            // For now, we'll just update the ETA periodically
+            const etas = ['15 mins', '12 mins', '10 mins', '8 mins', '5 mins', '2 mins', 'Arriving now'];
+            let currentEtaIndex = 0;
+            
+            setInterval(() => {
+                if (currentEtaIndex < etas.length) {
+                    document.querySelector('.map-placeholder p:nth-child(2)').textContent = `Vehicle Location: 2.5 km away`;
+                    document.querySelector('.map-placeholder p:nth-child(3)').textContent = `ETA: ${etas[currentEtaIndex]}`;
+                    currentEtaIndex++;
+                }
+            }, 10000); // Update every 10 seconds
+        }
+
+        // Call driver
+        document.getElementById('callDriverBtn').addEventListener('click', function() {
+            alert('Calling driver: +91 98765 43210');
+        });
+
+        // Message driver
+        document.getElementById('messageDriverBtn').addEventListener('click', function() {
+            alert('Opening chat with driver...');
+        });
+
+        // Initialize tracking updates
+        document.addEventListener('DOMContentLoaded', updateTrackingInfo);
+    </script>
+</body>
+</html>

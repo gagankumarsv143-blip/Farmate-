@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - Farmate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>My Bookings</h1>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Booking Status Tabs -->
+        <section class="booking-tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+                <button class="tab-btn" data-tab="completed">Completed</button>
+                <button class="tab-btn" data-tab="cancelled">Cancelled</button>
+            </div>
+        </section>
+
+        <!-- Booking Lists -->
+        <section class="bookings-list" id="bookingsList">
+            <!-- Bookings will be loaded here dynamically -->
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="HomeScreen.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="BookingsScreen.html" class="nav-item active">
+            <i class="fas fa-book"></i>
+            <span>Bookings</span>
+        </a>
+        <a href="ProfileScreen.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Load bookings
+        async function loadBookings(status = 'upcoming') {
+            try {
+                // In a real app, this would fetch from the backend
+                // For now, we'll use mock data
+                const mockBookings = {
+                    upcoming: [
+                        {
+                            id: '1',
+                            vehicleType: 'Tractor',
+                            vehicleBrand: 'Mahindra',
+                            driverName: 'Rajesh Patel',
+                            date: '2023-12-25',
+                            time: '08:00 AM',
+                            status: 'confirmed',
+                            amount: 1500,
+                            location: 'Ahmedabad'
+                        },
+                        {
+                            id: '2',
+                            vehicleType: 'Harvester',
+                            vehicleBrand: 'John Deere',
+                            driverName: 'Mukesh Sharma',
+                            date: '2023-12-28',
+                            time: '07:00 AM',
+                            status: 'pending',
+                            amount: 2500,
+                            location: 'Surat'
+                        }
+                    ],
+                    completed: [
+                        {
+                            id: '3',
+                            vehicleType: 'Power Tiller',
+                            vehicleBrand: 'Swaraj',
+                            driverName: 'Vijay Kumar',
+                            date: '2023-12-20',
+                            time: '09:00 AM',
+                            status: 'completed',
+                            amount: 1200,
+                            location: 'Vadodara'
+                        },
+                        {
+                            id: '4',
+                            vehicleType: 'Water Tanker',
+                            vehicleBrand: 'Tata',
+                            driverName: 'Amit Singh',
+                            date: '2023-12-18',
+                            time: '06:00 AM',
+                            status: 'completed',
+                            amount: 800,
+                            location: 'Rajkot'
+                        }
+                    ],
+                    cancelled: [
+                        {
+                            id: '5',
+                            vehicleType: 'Sprayer',
+                            vehicleBrand: 'Preet',
+                            driverName: 'Ramesh Mehta',
+                            date: '2023-12-15',
+                            time: '10:00 AM',
+                            status: 'cancelled',
+                            amount: 1000,
+                            location: 'Bhavnagar'
+                        }
+                    ]
+                };
+
+                const bookings = mockBookings[status] || [];
+                const bookingsList = document.getElementById('bookingsList');
+                bookingsList.innerHTML = '';
+
+                if (bookings.length === 0) {
+                    bookingsList.innerHTML = `
+                        <div class="no-bookings">
+                            <i class="fas fa-book-open"></i>
+                            <p>No ${status} bookings found</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                bookings.forEach(booking => {
+                    const bookingCard = document.createElement('div');
+                    bookingCard.className = 'booking-card';
+                    
+                    // Format date
+                    const bookingDate = new Date(booking.date);
+                    const formattedDate = bookingDate.toLocaleDateString('en-IN', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric'
+                    });
+                    
+                    bookingCard.innerHTML = `
+                        <div class="booking-header">
+                            <div class="vehicle-info">
+                                <h3>${booking.vehicleType} - ${booking.vehicleBrand}</h3>
+                                <p class="driver-name">Driver: ${booking.driverName}</p>
+                            </div>
+                            <div class="booking-status ${booking.status}">
+                                <span>${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-details">
+                            <div class="detail-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>${formattedDate} at ${booking.time}</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${booking.location}</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-rupee-sign"></i>
+                                <span>₹${booking.amount}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-actions">
+                            ${booking.status === 'upcoming' ? `
+                                <button class="btn-secondary track-btn" data-booking-id="${booking.id}">
+                                    <i class="fas fa-map-marker-alt"></i> Track
+                                </button>
+                                <button class="btn-secondary cancel-btn" data-booking-id="${booking.id}">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                            ` : ''}
+                            
+                            ${booking.status === 'completed' ? `
+                                <button class="btn-secondary rate-btn" data-booking-id="${booking.id}">
+                                    <i class="fas fa-star"></i> Rate
+                                </button>
+                                <button class="btn-secondary invoice-btn" data-booking-id="${booking.id}">
+                                    <i class="fas fa-file-invoice"></i> Invoice
+                                </button>
+                            ` : ''}
+                        </div>
+                    `;
+                    
+                    bookingsList.appendChild(bookingCard);
+                    
+                    // Add event listeners for actions
+                    if (booking.status === 'upcoming') {
+                        const trackBtn = bookingCard.querySelector('.track-btn');
+                        const cancelBtn = bookingCard.querySelector('.cancel-btn');
+                        
+                        if (trackBtn) {
+                            trackBtn.addEventListener('click', function() {
+                                window.location.href = `TrackingScreen.html?bookingId=${booking.id}`;
+                            });
+                        }
+                        
+                        if (cancelBtn) {
+                            cancelBtn.addEventListener('click', function() {
+                                cancelBooking(booking.id);
+                            });
+                        }
+                    }
+                    
+                    if (booking.status === 'completed') {
+                        const rateBtn = bookingCard.querySelector('.rate-btn');
+                        const invoiceBtn = bookingCard.querySelector('.invoice-btn');
+                        
+                        if (rateBtn) {
+                            rateBtn.addEventListener('click', function() {
+                                window.location.href = `RateBookingScreen.html?bookingId=${booking.id}`;
+                            });
+                        }
+                        
+                        if (invoiceBtn) {
+                            invoiceBtn.addEventListener('click', function() {
+                                // Download invoice functionality would go here
+                                alert('Invoice download functionality would go here');
+                            });
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading bookings:', error);
+            }
+        }
+
+        // Cancel booking
+        async function cancelBooking(bookingId) {
+            if (!confirm('Are you sure you want to cancel this booking?')) {
+                return;
+            }
+
+            try {
+                // In a real app, this would send a request to the backend
+                // For now, we'll just reload the bookings
+                alert('Booking cancelled successfully');
+                loadBookings('upcoming');
+            } catch (error) {
+                console.error('Error cancelling booking:', error);
+                alert('Error cancelling booking');
+            }
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Load bookings for the selected tab
+                const tab = this.getAttribute('data-tab');
+                loadBookings(tab);
+            });
+        });
+
+        // Load upcoming bookings by default
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBookings('upcoming');
+        });
+    </script>
+</body>
+</html>

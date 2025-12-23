@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Dashboard - Farmate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="location-selector">
+                <i class="fas fa-map-marker-alt"></i>
+                <select id="locationSelect">
+                    <option value="">Select Location</option>
+                    <option value="ahmedabad">Ahmedabad</option>
+                    <option value="surat">Surat</option>
+                    <option value="vadodara">Vadodara</option>
+                    <option value="rajkot">Rajkot</option>
+                    <option value="bhavnagar">Bhavnagar</option>
+                </select>
+            </div>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Driver Header -->
+        <section class="driver-header">
+            <div class="driver-avatar">
+                <i class="fas fa-user-circle" style="font-size: 5rem; color: #2e7d32;"></i>
+            </div>
+            <div class="driver-info">
+                <h2 id="driverName">Rajesh Patel</h2>
+                <p id="driverPhone">+91 98765 43210</p>
+                <div class="driver-rating">
+                    <i class="fas fa-star"></i>
+                    <span id="avgRating">4.7</span>
+                    <span id="totalReviews">(120 reviews)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Availability Toggle -->
+        <section class="availability-section">
+            <div class="availability-toggle">
+                <span>Online</span>
+                <label class="switch">
+                    <input type="checkbox" id="availabilityToggle" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span>Offline</span>
+            </div>
+            <p class="availability-status">You are currently available for bookings</p>
+        </section>
+
+        <!-- Driver Stats -->
+        <section class="driver-stats">
+            <div class="stat-card">
+                <i class="fas fa-book"></i>
+                <div class="stat-info">
+                    <h3 id="totalTrips">142</h3>
+                    <p>Total Trips</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-rupee-sign"></i>
+                <div class="stat-info">
+                    <h3 id="totalEarnings">₹2,85,000</h3>
+                    <p>Total Earnings</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-calendar"></i>
+                <div class="stat-info">
+                    <h3 id="todayEarnings">₹2,400</h3>
+                    <p>Today's Earnings</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Active Bookings -->
+        <section class="active-bookings">
+            <h3>Active Bookings</h3>
+            <div class="bookings-list" id="activeBookingsList">
+                <!-- Active bookings will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Vehicle Management -->
+        <section class="vehicle-management">
+            <h3>My Vehicles</h3>
+            <div class="vehicles-list" id="vehiclesList">
+                <!-- Vehicles will be loaded here -->
+            </div>
+            <button class="btn-primary add-vehicle-btn" id="addVehicleBtn">
+                <i class="fas fa-plus"></i> Add Vehicle
+            </button>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="DriverDashboard.html" class="nav-item active">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="DriverBookings.html" class="nav-item">
+            <i class="fas fa-book"></i>
+            <span>Bookings</span>
+        </a>
+        <a href="DriverProfile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Load driver data
+        async function loadDriverData() {
+            try {
+                // In a real app, this would fetch from the backend
+                // For now, we'll use mock data
+                const mockDriver = {
+                    name: 'Rajesh Patel',
+                    phone: '+91 98765 43210',
+                    avgRating: 4.7,
+                    totalReviews: 120,
+                    totalTrips: 142,
+                    totalEarnings: 285000,
+                    todayEarnings: 2400
+                };
+
+                document.getElementById('driverName').textContent = mockDriver.name;
+                document.getElementById('driverPhone').textContent = mockDriver.phone;
+                document.getElementById('avgRating').textContent = mockDriver.avgRating;
+                document.getElementById('totalReviews').textContent = `(${mockDriver.totalReviews} reviews)`;
+                document.getElementById('totalTrips').textContent = mockDriver.totalTrips;
+                document.getElementById('totalEarnings').textContent = `₹${mockDriver.totalEarnings}`;
+                document.getElementById('todayEarnings').textContent = `₹${mockDriver.todayEarnings}`;
+            } catch (error) {
+                console.error('Error loading driver data:', error);
+            }
+        }
+
+        // Load active bookings
+        async function loadActiveBookings() {
+            try {
+                // Mock active bookings data
+                const mockBookings = [
+                    {
+                        id: '1',
+                        farmerName: 'Vijay Kumar',
+                        vehicleType: 'Tractor',
+                        location: 'Ahmedabad',
+                        time: '08:00 AM',
+                        status: 'in-progress',
+                        amount: 1500
+                    },
+                    {
+                        id: '2',
+                        farmerName: 'Mukesh Sharma',
+                        vehicleType: 'Harvester',
+                        location: 'Surat',
+                        time: '09:00 AM',
+                        status: 'confirmed',
+                        amount: 2500
+                    }
+                ];
+
+                const bookingsList = document.getElementById('activeBookingsList');
+                bookingsList.innerHTML = '';
+
+                mockBookings.forEach(booking => {
+                    const bookingCard = document.createElement('div');
+                    bookingCard.className = 'booking-card';
+                    bookingCard.innerHTML = `
+                        <div class="booking-header">
+                            <div class="customer-info">
+                                <h3>${booking.farmerName}</h3>
+                                <p>${booking.vehicleType} • ${booking.location}</p>
+                            </div>
+                            <div class="booking-status ${booking.status}">
+                                <span>${booking.status.replace('-', ' ')}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-details">
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>${booking.time}</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-rupee-sign"></i>
+                                <span>₹${booking.amount}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-actions">
+                            <button class="btn-secondary track-btn" data-booking-id="${booking.id}">
+                                <i class="fas fa-map-marker-alt"></i> Navigate
+                            </button>
+                            <button class="btn-secondary contact-btn" data-booking-id="${booking.id}">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    `;
+                    bookingsList.appendChild(bookingCard);
+                });
+            } catch (error) {
+                console.error('Error loading active bookings:', error);
+            }
+        }
+
+        // Load vehicles
+        async function loadVehicles() {
+            try {
+                // Mock vehicles data
+                const mockVehicles = [
+                    {
+                        id: '1',
+                        type: 'Tractor',
+                        brand: 'Mahindra',
+                        model: '475 DI',
+                        year: 2022,
+                        registration: 'GJ05 AB 1234',
+                        hourlyRate: 500,
+                        dailyRate: 3000
+                    },
+                    {
+                        id: '2',
+                        type: 'Harvester',
+                        brand: 'John Deere',
+                        model: '955',
+                        year: 2021,
+                        registration: 'GJ05 CD 5678',
+                        hourlyRate: 800,
+                        dailyRate: 5000
+                    }
+                ];
+
+                const vehiclesList = document.getElementById('vehiclesList');
+                vehiclesList.innerHTML = '';
+
+                mockVehicles.forEach(vehicle => {
+                    const vehicleCard = document.createElement('div');
+                    vehicleCard.className = 'vehicle-card';
+                    vehicleCard.innerHTML = `
+                        <div class="vehicle-image">
+                            <i class="fas fa-tractor" style="font-size: 2rem; color: #2e7d32;"></i>
+                        </div>
+                        <div class="vehicle-info">
+                            <h3>${vehicle.type} - ${vehicle.brand}</h3>
+                            <p>${vehicle.model} (${vehicle.year})</p>
+                            <p class="reg-number">Reg: ${vehicle.registration}</p>
+                            <div class="vehicle-rates">
+                                <span>₹${vehicle.hourlyRate}/hr</span>
+                                <span>₹${vehicle.dailyRate}/day</span>
+                            </div>
+                        </div>
+                        <button class="btn-secondary edit-btn" data-vehicle-id="${vehicle.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    `;
+                    vehiclesList.appendChild(vehicleCard);
+                });
+            } catch (error) {
+                console.error('Error loading vehicles:', error);
+            }
+        }
+
+        // Availability toggle
+        document.getElementById('availabilityToggle').addEventListener('change', function() {
+            const status = this.checked ? 'available' : 'unavailable';
+            document.querySelector('.availability-status').textContent = 
+                `You are currently ${status} for bookings`;
+            
+            // In a real app, this would update the backend
+            console.log(`Driver availability updated to: ${status}`);
+        });
+
+        // Add vehicle button
+        document.getElementById('addVehicleBtn').addEventListener('click', function() {
+            alert('Add vehicle functionality would go here');
+        });
+
+        // Initialize all data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDriverData();
+            loadActiveBookings();
+            loadVehicles();
+        });
+    </script>
+</body>
+</html>

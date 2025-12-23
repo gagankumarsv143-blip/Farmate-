@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Farmate</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Support</h1>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Support Options -->
+        <section class="support-options">
+            <div class="support-card" id="faqCard">
+                <i class="fas fa-question-circle"></i>
+                <h3>FAQs</h3>
+                <p>Find answers to common questions</p>
+            </div>
+            <div class="support-card" id="contactCard">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Contact Us</h3>
+                <p>Get help from our support team</p>
+            </div>
+            <div class="support-card" id="emergencyCard">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Emergency Help</h3>
+                <p>Quick assistance for urgent issues</p>
+            </div>
+            <div class="support-card" id="feedbackCard">
+                <i class="fas fa-comment-dots"></i>
+                <h3>Feedback</h3>
+                <p>Share your experience with us</p>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-form-section" id="contactFormSection" style="display: none;">
+            <h2>Contact Support</h2>
+            <form id="supportForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="booking-issue">Booking Issue</option>
+                        <option value="payment">Payment Issue</option>
+                        <option value="vehicle">Vehicle Problem</option>
+                        <option value="driver">Driver Issue</option>
+                        <option value="app-feedback">App Feedback</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Describe your issue..." rows="5" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </section>
+
+        <!-- Emergency Contact -->
+        <section class="emergency-section" id="emergencySection" style="display: none;">
+            <h2>Emergency Contact</h2>
+            <div class="emergency-contact">
+                <i class="fas fa-phone"></i>
+                <div class="contact-info">
+                    <h3>Emergency Helpline</h3>
+                    <p>+91 98765 43210</p>
+                    <p>Available 24/7</p>
+                </div>
+            </div>
+            <button class="btn-primary" id="callEmergencyBtn">
+                <i class="fas fa-phone"></i> Call Now
+            </button>
+        </section>
+
+        <!-- FAQs Section -->
+        <section class="faqs-section" id="faqsSection" style="display: none;">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I book a vehicle?</h3>
+                <p>You can book a vehicle by selecting it from the home screen, choosing your preferred time and duration, and confirming the booking. Payment can be made through UPI, cash, or wallet.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What if the vehicle doesn't arrive on time?</h3>
+                <p>If a vehicle doesn't arrive within the expected time, please contact our support team immediately. We'll help resolve the issue and may offer compensation if needed.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I cancel my booking?</h3>
+                <p>Yes, you can cancel your booking up to 2 hours before the scheduled time. Cancellations after this time may incur charges.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How are prices calculated?</h3>
+                <p>Prices are calculated based on the type of vehicle, duration of use (hourly/daily/acre), and any additional services requested. Fuel costs may be included or charged separately.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I rate my driver?</h3>
+                <p>After completing a booking, you can rate your driver on the booking details page. Tap on the star rating and provide feedback about your experience.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Show contact form
+        document.getElementById('contactCard').addEventListener('click', function() {
+            document.getElementById('contactFormSection').style.display = 'block';
+            document.getElementById('emergencySection').style.display = 'none';
+            document.getElementById('faqsSection').style.display = 'none';
+        });
+
+        // Show emergency contact
+        document.getElementById('emergencyCard').addEventListener('click', function() {
+            document.getElementById('emergencySection').style.display = 'block';
+            document.getElementById('contactFormSection').style.display = 'none';
+            document.getElementById('faqsSection').style.display = 'none';
+        });
+
+        // Show FAQs
+        document.getElementById('faqCard').addEventListener('click', function() {
+            document.getElementById('faqsSection').style.display = 'block';
+            document.getElementById('contactFormSection').style.display = 'none';
+            document.getElementById('emergencySection').style.display = 'none';
+        });
+
+        // Call emergency
+        document.getElementById('callEmergencyBtn').addEventListener('click', function() {
+            alert('Calling emergency helpline: +91 98765 43210');
+        });
+
+        // Submit support form
+        document.getElementById('supportForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // In a real app, this would send the form to the backend
+            try {
+                alert('Your message has been sent successfully. Our support team will contact you soon.');
+                
+                // Reset form
+                document.getElementById('supportForm').reset();
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('Error submitting form. Please try again.');
+            }
+        });
+
+        // Show feedback form
+        document.getElementById('feedbackCard').addEventListener('click', function() {
+            const feedback = prompt('Please share your feedback about Farmate:');
+            if (feedback) {
+                alert('Thank you for your feedback! We appreciate your input.');
+            }
+        });
+    </script>
+</body>
+</html>
